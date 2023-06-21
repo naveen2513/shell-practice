@@ -1,14 +1,7 @@
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-yum install nodejs -y
-useradd roboshop
-rm -rf /app
-mkdir /app
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip
-cd /app
-unzip /tmp/cart.zip
-cd /app
-npm install
-cp /home/centos/shell-practice/cart.service /etc/systemd/system/cart.service
-systemctl daemon-reload
-systemctl enable cart
-systemctl restart cart
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source ${script_path}/common.sh
+
+component=cart
+fun_nodejs
+
