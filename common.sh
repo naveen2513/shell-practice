@@ -1,25 +1,31 @@
 add_user=roboshop
 script=$(realpath "$0")
 script_path=$(dirname "$script")
+log_file=/tmp/roboshop.log
 
 
 print_head() {
     echo -e "\e[32m>>>>>>>>> $1 <<<<<<<\e[0m"
+    echo -e "\e[32m>>>>>>>>> $1 <<<<<<<\e[0m" &>>$log_file
+
 
 }
 fun_status_check() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[31msuccess\e[0m"
+    echo -e "\e[31msuccess\e[0m" &>>$log_file
   else
-    echo -e "\e[31msuccess\e[0m"
-    echo "Refer the log file /tmp/roboshop.log for more information"
+    echo -e "\e[31msuccess\e[0m" &>>$log_file
+    echo "Refer the log file /tmp/roboshop.log for more information" &>>$log_file
     exit 1
  fi
 }
 
 fun_app_prereq() {
   print_head "add user"
-  useradd ${add_user} &>>$log_file
+  id ${add_user} &>>$log_file
+  if [ $? -eq 1 ]; then
+      useradd ${add_user} &>>$log_file
+  fi
   fun_status_check $?
   print_head "create directory"
   rm -rf /app &>>$log_file
