@@ -39,7 +39,7 @@ fun_app_prereq() {
 
   print_head "extract content"
 
-  cd /app &>>$log_file
+  cd /app
   unzip /tmp/${component}.zip &>>$log_file
     fun_status_check $?
 
