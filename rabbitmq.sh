@@ -10,27 +10,27 @@ if [ -z "${rabbitmq_password}" ]; then
   exit 1
 
 fi
-echo -e "\e[32m>>>>>>>>> yum repo script<<<<<<<\e[0m"
+print_head "yum repo script"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> download app content<<<<<<<\e[0m"
+print_head "download app content"
 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> install mysql<<<<<<<\e[0m"
+print_head "install mysql"
 
 yum install rabbitmq-server -y &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> add user<<<<\e[0m"
+print_head "add user"
 
 rabbitmqctl add_user roboshop ${rabbitmq_password} &>>$log_file
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> start rabbitmq<<<<<<<\e[0m"
+print_head "start rabbitmq"
 
 systemctl enable rabbitmq-server &>>$log_file
 systemctl restart rabbitmq-server &>>$log_file

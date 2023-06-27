@@ -9,28 +9,28 @@ if [ -z "${mysql_root_password}" ]; then
 fi
 
 
-echo -e "\e[32m>>>>>>>>> disable mysql<<<<<<<\e[0m"
+print_head "disable mysql "
 
 yum module disable mysql -y &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> copy mysql repo file<<<<<<<\e[0m"
+print_head "copy mysql repo file "
 
 cp /home/centos/shell-practice/mysql.repo /etc/yum.repos.d/mysql.repo &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> install mysql<<<<<<<\e[0m"
+print_head "install mysql"
 
 yum install mysql-community-server -y &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> set up password<<<<<<<\e[0m"
+print_head "set up password"
 
 
 mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$log_file
     fun_status_check $?
 
-echo -e "\e[32m>>>>>>>>> start mysql<<<<<<<\e[0m"
+print_head "start mysql"
 
 systemctl enable mysqld &>>$log_file
 systemctl restart mysqld &>>$log_file

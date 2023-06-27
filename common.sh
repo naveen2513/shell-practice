@@ -12,10 +12,10 @@ print_head() {
 }
 fun_status_check() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[31msuccess\e[0m" &>>$log_file
+    echo -e "\e[34msuccess\e[0m"
   else
-    echo -e "\e[31msuccess\e[0m" &>>$log_file
-    echo "Refer the log file /tmp/roboshop.log for more information" &>>$log_file
+    echo -e "\e[34mfailure\e[0m"
+    echo "Refer the log file /tmp/roboshop.log for more information"
     exit 1
  fi
 }
