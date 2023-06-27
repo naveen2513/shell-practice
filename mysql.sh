@@ -2,6 +2,13 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
+if [ -z "${mysql_root_password}" ]; then
+  input mysql root password missing
+  exit 1
+
+fi
+
+
 echo -e "\e[32m>>>>>>>>> disable mysql<<<<<<<\e[0m"
 
 yum module disable mysql -y &>>$log_file
