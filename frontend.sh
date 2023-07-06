@@ -5,6 +5,10 @@ source ${script_path}/common.sh
 print_head "install nginx "
 yum install nginx -y
     fun_status_check $?
+print_head "copy roboshop conf file"
+
+cp /home/centos/shell-practice/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>$log_file
+    fun_status_check $?
 
 print_head "remove old app content"
 
@@ -23,10 +27,6 @@ print_head "extract app content"
 unzip /tmp/frontend.zip &>>$log_file
     fun_status_check $?
 
-print_head "copy roboshop conf file"
-
-cp /home/centos/shell-practice/roboshop.conf /etc/nginx/default.d/roboshop.conf &>>$log_file
-    fun_status_check $?
 
 print_head "restart nginx"
 
