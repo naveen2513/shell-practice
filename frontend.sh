@@ -6,12 +6,12 @@ print_head "install nginx "
 yum install nginx -y
     fun_status_check $?
 
-print_head "remove lod app content"
+print_head "remove old app content"
 
 rm -rf /usr/share/nginx/html/*
     fun_status_check $?
 
-print_head "download app cotnent"
+print_head "download app content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>$log_file
     fun_status_check $?
