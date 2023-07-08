@@ -126,7 +126,6 @@ fun_java() {
   yum install maven -y &>>$log_file
       fun_status_check $?
 
-  print_head "add user"
   fun_app_prereq
   print_head "download dependencies"
 
